@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 name: Build and Deploy to gh-pages
+name: Build and deploy to GitHub Pages
 
 on:
   push:
@@ -6,10 +8,11 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -22,13 +25,11 @@ jobs:
         run: npm ci
 
       - name: Build (production)
-        run: npm run build -- --configuration production
+        run: npm run predeploy
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          user_name: 'github-actions[bot]'
-          user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+          publish_dir: ./dist/TaskManager
+

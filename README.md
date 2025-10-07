@@ -57,3 +57,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deploying
+
+This repository includes a GitHub Actions workflow that builds the app and deploys the production output to GitHub Pages whenever you push to `main`.
+
+Local deploy (useful for testing):
+
+1. Install dependencies: `npm ci`
+2. Build and publish: `npm run deploy` (this runs a production build then publishes `dist/TaskManager` using the `gh-pages` package)
+
+If you prefer automatic deploys, pushing to `main` will trigger the workflow and publish the contents of `dist/TaskManager` to GitHub Pages using the repository's `GITHUB_TOKEN`.

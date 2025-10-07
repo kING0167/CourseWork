@@ -6,8 +6,8 @@
 	<div class="card-body">
 		<ul class="list-group">
 			<li *ngFor="let t of taskItems; let i = index" class="list-group-item d-flex align-items-center">
-				<input type="checkbox" class="me-3" [checked]="t.done" (change)="functions.toggleTask(i)">
 				<span [class.done]="t.done">{{ t.text }}</span>
+				<input type="checkbox" class="me-3" [checked]="t.done" (change)="functions.toggleTask(i)" style="margin-left: auto; font-weight: bold;" />Completed
 			</li>
 			<li *ngIf="taskItems.length === 0" class="list-group-item text-muted">No tasks yet.</li>
 		</ul>
