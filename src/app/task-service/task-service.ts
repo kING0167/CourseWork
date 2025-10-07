@@ -4,52 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TaskService {
-  private products = [
-    {name:"Chrome", stock: 1, price: 300.67, cpu: "16"},
-    {name:"Netflix", stock: 1, price: 217.03 , cpu: "19"},
-    {name:"To-Do List", stock: 1, price: 17.01 , cpu: "3"},
-    {name:"Messenger", stock: 1, price: 98.73 , cpu: "11"},
-    {name:"Classroom", stock: 1, price: 64.59 , cpu: "9"},
-  ];
+  private tasks: { text: string; done: boolean }[] = [];
 
-  getProducts(){
-    return this.products;
+  addTask(text: string) {
+    if (!text || !text.toString().trim()) return;
+    this.tasks.push({ text: text.toString(), done: false });
   }
 
-  cartItems:any[] = [];
-  getCartItems(){
-    return this.cartItems;
+  toggleTask(index: number) {
+    const t = this.tasks[index];
+    if (t) t.done = !t.done;
   }
 
-
-  addToCart(product:any){
-    if(product.stock > 0){
-      product.stock -= 1;
-
-      const existingItem = this.cartItems.find(item => item.name === product.name);
-      if(existingItem){
-        existingItem.cartStock += 1;
-      }
-      else{
-        this.cartItems.push({...product, cartStock: 1, completed: false});
-      }
-    }
+  getTask() {
+    return this.tasks;
   }
 
-  getCartTotalItems(){
-    return this.cartItems
-      .filter(item => !item.completed)
-      .reduce((total, item) => total + item.cartStock, 0);
+  getTotalTasks() {
+    return this.tasks.length;
   }
-
-  getCartTotalPrice(){
-    return this.cartItems
-      .filter(item => !item.completed)
-      .reduce((total, item) => total + (item.price * item.cartStock), 0);
-  }
-
-  isTaskCompleted(productName: string): boolean {
-    const cartItem = this.cartItems.find(item => item.name === productName);
-    return cartItem ? cartItem.completed : false;
-  }
+  
 }

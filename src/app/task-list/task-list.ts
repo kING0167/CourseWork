@@ -11,18 +11,16 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskList {
   
-  cartItems:any[] = [];
+  taskItems:any[] = [];
 
-  constructor(private functions: TaskService){}
+  constructor(public functions: TaskService){}
 
   ngOnInit(){
-    this.cartItems = this.functions.getCartItems();
+    this.taskItems = this.functions.getTask();
   }
 
-  get totalItems(){
-    return this.functions.getCartTotalItems();
+  get totalTasks(){
+    return this.functions.getTotalTasks();
   }
-  get totalPrice(){
-    return this.functions.getCartTotalPrice();
-  }
+
 }

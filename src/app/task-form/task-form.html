@@ -4,35 +4,8 @@
     </div>
     <div class="card-body">
         <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Search available tasks..." [(ngModel)]="searchProduct">
+            <input type="text" #newtask class="form-control" placeholder="Enter new task">
         </div>
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">App</th>
-                    <th scope="col">CPU</th>
-                    <th scope="col">Memory</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of filteredProducts">
-                    <td>{{product.name}}</td>
-                    <td>{{product.cpu}}%</td>
-                    <td>{{product.price}} MB</td>
-                    <td class="text-center">
-                        <button *ngIf="product.stock > 0" class="btn btn-outline-primary btn-sm" (click)="aaddToCart(product)">
-                            <i class="bi bi-plus-circle me-1"></i>Add Task
-                        </button>
-                        <button disabled *ngIf="product.stock === 0 && !isTaskCompleted(product.name)" class="btn btn-warning btn-sm">
-                            <i class="bi bi-hourglass-split me-1"></i>Running
-                        </button>
-                        <button disabled *ngIf="product.stock === 0 && isTaskCompleted(product.name)" class="btn btn-success btn-sm">
-                            <i class="bi bi-check-circle me-1"></i>Completed
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <button class="btn btn-primary mb-3" (click)="addToTask(newtask.value); newtask.value=''">Add Task</button>
     </div>
 </div>

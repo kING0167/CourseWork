@@ -1,43 +1,15 @@
-<div class="card shadow-sm">
-    <div class="card-header bg-white">
-        <h5 class="card-title mb-0">My Active Tasks</h5>
-    </div>
-    <div *ngIf="cartItems.length > 0; else emptyCart">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th scope="col">App</th>
-                        <th scope="col">Memory</th>
-                        <th scope="col">CPU</th>
-                        <th scope="col" class="text-center">Completed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of cartItems" [class.completed-task]="product.completed">
-                        <td>{{product.name}}</td>
-                        <td>{{product.price}} MB</td>
-                        <td>{{product.cpu}}%</td>
-                        <td class="text-center">
-                            <div class="form-check d-flex justify-content-center">
-                                <input class="form-check-input" type="checkbox" [(ngModel)]="product.completed" style="transform: scale(1.4);">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer text-front">
-            <span class="fs-5 fw-bold">Number of Active Tasks: {{totalItems}}</span>
-        </div>
-    </div>
-</div>
 
-<ng-template #emptyCart>
-    <div class="card-body text-center">
-        <div class="alert alert-light mb-0">
-            <h4 class="alert-heading">No Tasks to Do!</h4>
-            <p class="mb-0">Add a task from the "Task Form" list to get started.</p>
-        </div>
-    </div>
-</ng-template>
+<div class="card shadow-sm">
+	<div class="card-header bg-white">
+		<h5 class="card-title mb-0">Your Tasks ({{ totalTasks }})</h5>
+	</div>
+	<div class="card-body">
+		<ul class="list-group">
+			<li *ngFor="let t of taskItems; let i = index" class="list-group-item d-flex align-items-center">
+				<input type="checkbox" class="me-3" [checked]="t.done" (change)="functions.toggleTask(i)">
+				<span [class.done]="t.done">{{ t.text }}</span>
+			</li>
+			<li *ngIf="taskItems.length === 0" class="list-group-item text-muted">No tasks yet.</li>
+		</ul>
+	</div>
+</div>

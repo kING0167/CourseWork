@@ -12,27 +12,19 @@ import { FormsModule } from '@angular/forms';
 
 export class TaskForm {
 
-  searchProduct:string = "";
-  products:any[] = [];
+  tasks: any[] = [];
 
-  constructor(private functions:TaskService){}
+  constructor(private functions: TaskService) {}
 
-  ngOnInit(){
-    this.products = this.functions.getProducts();
+  ngOnInit() {
+    this.tasks = this.functions.getTask();
   }
 
-  get filteredProducts(){
-    return this.products.filter(product => 
-      product.name.toLowerCase().includes(this.searchProduct.toLowerCase())      
-    );
+  addToTask(taskText: string) {
+    if (!taskText || !taskText.toString().trim()) return;
+    this.functions.addTask(taskText.toString());
+
+    alert(taskText + ' added to your Task List.');
   }
 
-  aaddToCart(product: any){
-    this.functions.addToCart(product);
-    alert(product.name + " is added to your Task List.")
-  }
-
-  isTaskCompleted(productName: string): boolean {
-    return this.functions.isTaskCompleted(productName);
-  }
 }
