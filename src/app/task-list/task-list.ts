@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../task-service/task-service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './task-list.html',
-  styleUrl: './task-list.css'
+  styleUrls: ['./task-list.css']
 })
 export class TaskList {
   
@@ -23,4 +23,11 @@ export class TaskList {
     return this.functions.getTotalTasks();
   }
 
+  get totalCompletedTasks(){
+    return this.taskItems.filter(t => t.done).length;
+  }
+
+  get totalRemainingTasks(){
+    return this.taskItems.filter(t => !t.done).length;
+  }
 }

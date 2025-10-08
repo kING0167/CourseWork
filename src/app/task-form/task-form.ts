@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../task-service/task-service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './task-form.html',
-  styleUrl: './task-form.css'
+  styleUrls: ['./task-form.css']
 })
 
 export class TaskForm {

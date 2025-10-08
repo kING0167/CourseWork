@@ -23,5 +23,9 @@ export class TaskService {
   getTotalTasks() {
     return this.tasks.length;
   }
+
+  deleteTask(index: number) {
+    this.tasks.splice(index, 1);
+  }
   
 }
